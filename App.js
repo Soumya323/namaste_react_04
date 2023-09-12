@@ -23,7 +23,7 @@ const Header = () => {
     return (
         <div className="header">
             <div className="logo-container">
-                <img className="logo" src="https://w7.pngwing.com/pngs/894/279/png-transparent-online-food-ordering-food-delivery-grubhub-others-food-service-logo-thumbnail.png" />
+                <img className="logo" src="https://www.logodesign.net/logo/smoking-burger-with-lettuce-3624ld.png?nwm=1&nws=1&industry=food&sf=" />
             </div>
             <div className="nav-items">
                 <ul>
@@ -40,11 +40,13 @@ const Header = () => {
 
 const Body = () => {
 
-    const showRestaurants = restaurantsList.map((restaurant) => {
-        return (
-            <RestaurantCard resData={restaurant} />
-        );
-    });
+    // const showRestaurants = restaurantsList.map((restaurant) => {
+    //     return (
+    //         <RestaurantCard resData={restaurant} />
+    //     );
+    // });
+
+    const showRestaurants = restaurantsList.map((restaurant) => <RestaurantCard key={restaurant.card.card.info.id} resData={restaurant} />);
 
     return (
         <div className=" body">
@@ -62,6 +64,7 @@ const RestaurantCard = (props) => {
 
     // const { resData } = props;     // Destructing of JS Object
     const resData = props.resData.card.card;
+    const { cloudinaryImageId, name, cuisines, costForTwo, avgRating } = resData?.info;
 
     return (
         <div className="res-card">
@@ -69,13 +72,13 @@ const RestaurantCard = (props) => {
                 <img
                     className="res-logo"
                     alt="res-logo"
-                    src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" + resData.info.cloudinaryImageId}
+                    src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" + cloudinaryImageId}
                 />
             </div>
-            <h3>{resData.info.name}</h3>
-            <h4>{resData.info.cuisines.join(", ")}</h4>
-            <h4>{resData.info.costForTwo}</h4>
-            <h4>{resData.info.avgRating} Rating</h4>
+            <h3>{name}</h3>
+            <h4>{cuisines.join(", ")}</h4>
+            <h4>{costForTwo}</h4>
+            <h4>{avgRating} Rating</h4>
             <h4>{resData.info.sla.deliveryTime}min Delivery Time</h4>
         </div>
     );
