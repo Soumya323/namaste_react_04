@@ -35,6 +35,10 @@
     margin: 10px;
 }
 
+.nav-items>ul>li>a {
+    text-decoration: none;
+}
+
 .search {
     padding: 10px;
 }
@@ -87,6 +91,6 @@
     cursor: pointer;
 }
 
-.filter{
+.filter {
     display: flex;
 }
