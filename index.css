@@ -43,6 +43,10 @@
     padding: 10px;
 }
 
+.res-card-link {
+    text-decoration: none;
+}
+
 .res-container {
     display: flex;
     flex-wrap: wrap;

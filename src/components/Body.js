@@ -1,6 +1,7 @@
 import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 const Body = () => {
     // Local State Varaible
@@ -31,7 +32,11 @@ const Body = () => {
 
     function GetRestaurantCards() {
         return (
-            filteredRestaurants.map((res) => <RestaurantCard key={res.card.card.info.id} resData={res} />)
+            filteredRestaurants.map((res) =>
+                <Link to={"/restaurants/" + res.card.card.info.id} key={res.card.card.info.id} className="res-card-link">
+                    <RestaurantCard resData={res} />
+                </Link>
+            )
         );
     }
 
