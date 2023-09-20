@@ -1,24 +1,13 @@
-import { useState, useEffect } from "react";
-import dummyRestaurantDetail from "../utils/mockDataRestaurantDetail"
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
+import useRestaurantMenu from "../utils/useRestaurantMenu";
 
 const RestaurantMenu = () => {
 
-    const [resInfo, setResInfo] = useState(null);
-    const {resId} = useParams();    // extracts the resId (any params from the route path)
+    const { resId } = useParams();    // extracts the resId (any params from the route path)
 
-    useEffect(() => {
-        fetchMenu();
-    }, []);
+    const resInfo = useRestaurantMenu(resId);
 
-    const fetchMenu = async () => {
-        // The swiggy hotel menu apis don't work so using mock data
-        // const data = await fetch("https://www.swiggy.com/mapitmenu/wpage-type=REGULAR_MENU&complete-menu=true&lat=28.4089123&Ing=77.3177894&restaurantld=42620&submitAction=ENTER" );
-        // const json = await data.json;
-
-        setResInfo(dummyRestaurantDetail);
-    }
 
     if (resInfo == null) {
         // If no data is fetched yet then show shimmer UI

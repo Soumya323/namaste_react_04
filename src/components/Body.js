@@ -2,12 +2,16 @@ import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
     // Local State Varaible
     const [listOfRestaurants, setListOfRestaurants] = useState([]);
     const [filteredRestaurants, setFilteredRestaurants] = useState([]);
     const [searchText, setSearchText] = useState("");
+
+
+    //#region API calls to get restaurant data and fitlerg restaurants
 
     const apiURL = "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&collection=83649&tags=layout_CCS_Biryani&sortBy=&filters=&type=rcv2&offset=0&page_type=null";
 
@@ -43,6 +47,18 @@ const Body = () => {
     function FilterRestaurantsBySearch() {
         const filteredResult = listOfRestaurants.filter((res) => res.card.card.info.name.toLowerCase().includes(searchText.toLowerCase()));
         setFilteredRestaurants(filteredResult);
+    }
+
+    //#endregion
+
+
+    const onlineStatus = useOnlineStatus();
+    if (onlineStatus == false) {
+        return (
+            <div>
+                <h1>Looks like you're offline!! Please check your internet connection.</h1>
+            </div>
+        );
     }
 
     if (listOfRestaurants.length == 0) {
